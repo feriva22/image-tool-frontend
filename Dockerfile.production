@@ -16,7 +16,7 @@ COPY --from=build /app /app
 
 RUN apk add tzdata
 
-EXPOSE 80
+EXPOSE 8080
 
 ENV TZ=Asia/Jakarta
 
