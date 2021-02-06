@@ -7,8 +7,8 @@ export default {
 
   // Global page headers: https://go.nuxtjs.dev/config-head
   head: {
-    titleTemplate: 'DeepRest Image - %s',
-    title: 'DeepRest Image',
+    titleTemplate: 'Image Tool - %s',
+    title: 'Image Tool',
     meta: [
       { charset: 'utf-8' },
       { name: 'viewport', content: 'width=device-width, initial-scale=1' },
@@ -85,7 +85,7 @@ export default {
   build: {
   },
   server: {
-    host: '0.0.0.0',
+    host: '0.0.0.0', //need listen to all ip for deploy in docker
     port: process.env.PORT || 3000
   }
 }

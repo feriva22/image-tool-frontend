@@ -7,19 +7,51 @@
       fixed
       app
     >
-      <v-list>
-        <v-list-item
-          v-for="(item, i) in items"
-          :key="i"
-          :to="item.to"
-          router
-          exact
-        >
+      <v-list rounded>
+        <v-list-item to="/" router exact>
           <v-list-item-action>
-            <v-icon>{{ item.icon }}</v-icon>
+            <v-icon>mdi-home</v-icon>
           </v-list-item-action>
           <v-list-item-content>
-            <v-list-item-title v-text="item.title" />
+            <v-list-item-title>Home</v-list-item-title>
+          </v-list-item-content>
+        </v-list-item>
+        <v-list-group prepend-icon="mdi-apps">
+          <template v-slot:activator>
+            <v-list-item-content>
+              <v-list-item-title>Feature</v-list-item-title>
+            </v-list-item-content>
+          </template>
+          <v-list-item
+            v-for="(feature, i) in features"
+            :key="i"
+            :to="feature.to"
+            :disabled="!feature.ready"
+            router
+            exact
+          >
+            <v-list-item-content>
+              <v-list-item-title v-text="feature.title" />
+            </v-list-item-content>
+            <v-list-item-action>
+              <v-icon v-text="feature.icon"></v-icon>
+            </v-list-item-action>
+          </v-list-item>
+        </v-list-group>
+        <v-list-item to="/gallery" router exact>
+          <v-list-item-action>
+            <v-icon>mdi-image-multiple</v-icon>
+          </v-list-item-action>
+          <v-list-item-content>
+            <v-list-item-title>Gallery</v-list-item-title>
+          </v-list-item-content>
+        </v-list-item>
+        <v-list-item to="/about" router exact>
+          <v-list-item-action>
+            <v-icon>mdi-chart-bubble</v-icon>
+          </v-list-item-action>
+          <v-list-item-content>
+            <v-list-item-title>About</v-list-item-title>
           </v-list-item-content>
         </v-list-item>
       </v-list>
@@ -56,21 +88,36 @@ export default {
       clipped: true,
       drawer: true,
       fixed: false,
-      items: [
+      features: [
         {
-          icon: 'mdi-apps',
-          title: 'Welcome',
-          to: '/',
+          icon: 'mdi-crop',
+          title: 'Crop Image',
+          to: '/feature/crop',
+          ready: true,
         },
         {
-          icon: 'mdi-image-multiple',
-          title: 'Gallery',
-          to: '/gallery',
+          icon: 'mdi-arrow-split-horizontal',
+          title: 'Resize Image',
+          to: '/feature/resize',
+          ready: true,
         },
         {
-          icon: 'mdi-chart-bubble',
-          title: 'About',
-          to: '/about',
+          icon: 'mdi-ceiling-light',
+          title: 'Contras Image',
+          to: '/feature/contras',
+          ready: true,
+        },
+        {
+          icon: 'mdi-swap-horizontal-bold',
+          title: 'Convert Image',
+          to: '/feature/convert',
+          ready: true,
+        },
+        {
+          icon: 'mdi-auto-fix',
+          title: 'Restor Image',
+          to: '/feature/restoration',
+          ready: false,
         },
       ],
       miniVariant: false,
