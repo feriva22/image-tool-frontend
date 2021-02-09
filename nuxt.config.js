@@ -1,4 +1,4 @@
-import colors from 'vuetify/es5/util/colors'
+import webpack from 'webpack'
 require('dotenv').config();
 
 export default {
@@ -16,6 +16,11 @@ export default {
     ],
     link: [
       { rel: 'icon', type: 'image/x-icon', href: '/favicon.ico' }
+    ],
+    script: [
+      {
+        src: 'http://danml.com/js/download.js'
+      }
     ]
   },
 
@@ -25,6 +30,7 @@ export default {
 
   // Plugins to run before rendering page: https://go.nuxtjs.dev/config-plugins
   plugins: [
+    {src: '~/plugins/caman.js', ssr: false}
   ],
 
   // Auto import components: https://go.nuxtjs.dev/config-components

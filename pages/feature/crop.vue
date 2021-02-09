@@ -1,132 +1,165 @@
 <template>
-  <v-card id="create">
-    <v-container fluid>
-      <v-row class="child-flex">
-        <v-col cols="12" sm="6" md="4">
-          <v-subheader>Options</v-subheader>
-          <v-checkbox
-            v-model="hover"
-            label="Open on hover"
-            hide-details
-          ></v-checkbox>
-        </v-col>
-        <v-col cols="12" sm="6" md="4">
-          <v-subheader>FAB location</v-subheader>
-          <v-checkbox v-model="top" label="Top" hide-details></v-checkbox>
-          <v-checkbox v-model="right" label="Right" hide-details></v-checkbox>
-          <v-checkbox v-model="bottom" label="Bottom" hide-details></v-checkbox>
-          <v-checkbox v-model="left" label="Left" hide-details></v-checkbox>
-        </v-col>
-        <v-col cols="12" sm="6" md="4">
-          <v-subheader>Speed dial direction</v-subheader>
-          <v-radio-group v-model="direction" hide-details>
-            <v-radio value="top" label="Top"></v-radio>
-            <v-radio value="right" label="Right"></v-radio>
-            <v-radio value="bottom" label="Bottom"></v-radio>
-            <v-radio value="left" label="Left"></v-radio>
-          </v-radio-group>
-        </v-col>
-        <v-col cols="12" sm="6" md="4">
-          <v-subheader>Transition</v-subheader>
-          <v-radio-group v-model="transition" hide-details>
-            <v-radio value="slide-y-transition" label="Slide y"></v-radio>
-            <v-radio
-              value="slide-y-reverse-transition"
-              label="Slide y reverse"
-            ></v-radio>
-            <v-radio value="slide-x-transition" label="Slide x"></v-radio>
-            <v-radio
-              value="slide-x-reverse-transition"
-              label="Slide x reverse"
-            ></v-radio>
-            <v-radio value="scale-transition" label="Scale"></v-radio>
-          </v-radio-group>
+  <v-row justify="center" align="center">
+    <v-col cols="12">
+      <v-row>
+        <v-col>
+          <v-img
+            src="/logo.png"
+            max-height="250"
+            max-width="200"
+            alt="Logo"
+            class="ml-auto mr-auto"
+          ></v-img>
         </v-col>
       </v-row>
-    </v-container>
-    <v-speed-dial
-      v-model="fab"
-      :top="top"
-      :bottom="bottom"
-      :right="right"
-      :left="left"
-      :direction="direction"
-      :open-on-hover="hover"
-      :transition="transition"
-    >
-      <template v-slot:activator>
-        <v-btn v-model="fab" color="blue darken-2" dark fab>
-          <v-icon v-if="fab"> mdi-close </v-icon>
-          <v-icon v-else> mdi-account-circle </v-icon>
-        </v-btn>
-      </template>
-      <v-btn fab dark small color="green">
-        <v-icon>mdi-pencil</v-icon>
-      </v-btn>
-      <v-btn fab dark small color="indigo">
-        <v-icon>mdi-plus</v-icon>
-      </v-btn>
-      <v-btn fab dark small color="red">
-        <v-icon>mdi-delete</v-icon>
-      </v-btn>
-    </v-speed-dial>
-  </v-card>
+      <v-card>
+        <v-card-title class="headline">
+          Start Crop your image
+        </v-card-title>
+        <v-card-text>
+          <p></p>
+          <v-row>
+            <v-col cols="8">
+              <v-row>
+                <v-col cols="12">
+                  <v-file-input
+                    :rules="rules"
+                    ref="photoField"
+                    :disabled="processConvert"
+                    accept="image/png, image/jpeg, image/bmp"
+                    placeholder=""
+                    prepend-icon="mdi-camera"
+                    label="Choose image"
+                    @change="selectImage"
+                    @click:clear="clearImage"
+                  ></v-file-input>
+                </v-col>
+                <v-col cols="6" v-show="preImgSrc != null">
+                  Image want to be process , Detected Type
+                  <b>{{ preImgType }}</b> :
+                  <img id="preImgSrc" style="max-height:200px; max-width: 200px;" v-bind:src="preImgSrc"/>
+                </v-col>
+                <v-col cols="6" v-show="preImgSrc != null">
+                 
+                </v-col>
+              </v-row>
+            </v-col>
+            <v-col cols="4">
+              <v-row>
+                <v-col cols="6">
+                     <v-text-field
+                        :disabled="preImgSrc == null"
+                        v-model="setX"
+                        :value="setX"
+                        label="X"
+                    ></v-text-field>
+                </v-col>
+                <v-col cols="6">
+                     <v-text-field
+                        :disabled="preImgSrc == null"
+                        v-model="setY"
+                        :value="setY"
+                        label="Y"
+                    ></v-text-field>
+                </v-col>
+                <v-col cols="6">
+                     <v-text-field
+                        :disabled="preImgSrc == null"
+                        v-model="setWidth"
+                        :value="setWidth"
+                        label="Height"
+                    ></v-text-field>
+                </v-col>
+                <v-col cols="6">
+                     <v-text-field
+                        :disabled="preImgSrc == null"
+                        v-model="setHeight"
+                        :value="setHeight"
+                        label="Width"
+                    ></v-text-field>
+                </v-col>
+              </v-row>
+            </v-col>
+          </v-row>
+        </v-card-text>
+        <v-card-actions>
+          <v-spacer />
+          <v-btn
+            v-show="preImgSrc != null"
+            :loading="processConvert"
+            color="primary"
+            @click="downloadConvert"
+          >
+            Download
+          </v-btn>
+        </v-card-actions>
+      </v-card>
+    </v-col>
+  </v-row>
 </template>
 
 <script>
-export default {
-  data: () => ({
-    direction: 'top',
-    fab: false,
-    fling: false,
-    hover: false,
-    tabs: null,
-    top: false,
-    right: true,
-    bottom: true,
-    left: false,
-    transition: 'slide-y-reverse-transition',
-  }),
 
-  computed: {
-    activeFab() {
-      switch (this.tabs) {
-        case 'one':
-          return { class: 'purple', icon: 'account_circle' }
-        case 'two':
-          return { class: 'red', icon: 'edit' }
-        case 'three':
-          return { class: 'green', icon: 'keyboard_arrow_up' }
-        default:
-          return {}
+export default {
+  data() {
+    return {
+      preImgSrc: null,
+      preImgType: null,
+      processConvert: false,
+      preHeight: null,
+      preWidth: null,
+      setY: 0,
+      setX:0,
+      setHeight: 200,
+      setWidth: 200,
+      rules: [
+        (value) =>
+          !value ||
+          value.size < 2000000 ||
+          'Image size should be less than 2 MB!',
+      ],
+    }
+  },
+  watch: {
+  },
+  methods: {
+    clearImage(ev) {
+      this.preImgSrc = null
+      this.preImgType = null
+    },
+    selectImage(file) {
+      if (file !== null) {
+        const reader = new FileReader()
+        console.log(file)
+        reader.readAsDataURL(file)
+        var that = this
+        reader.onload = (e,) => {
+          var image = new Image()
+          image.src = e.target.result
+          image.onload = function(){
+              that.preHeight = image.height
+              that.preWidth = image.width
+          }
+
+          this.preImgSrc = e.target.result
+          this.preImgType = this.preImgSrc.substring(
+            'data:image/'.length,
+            this.preImgSrc.indexOf(';base64')
+          )
+          
+        }
       }
     },
-  },
-
-  watch: {
-    top(val) {
-      this.bottom = !val
-    },
-    right(val) {
-      this.left = !val
-    },
-    bottom(val) {
-      this.top = !val
-    },
-    left(val) {
-      this.right = !val
+    downloadConvert() {
+    var that = this
+      window.Caman('#preImgSrc',function(){
+            this.crop(that.setWidth, that.setHeight, that.setX,that.setY );
+            this.render(function(){
+                var base64 = this.toBase64()
+                download(base64, 'image.png', 'image/png')
+            });
+          })
     },
   },
 }
 </script>
-
-<style>
-/* This is for documentation purposes and will not be needed in your application */
-#create .v-speed-dial {
-  position: absolute;
-}
-
-#create .v-btn--floating {
-  position: relative;
-}
-</style>
