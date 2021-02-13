@@ -67,16 +67,7 @@
       </v-container>
     </v-main>
     <v-footer fixed app>
-      <span
-        >&copy; {{ new Date().getFullYear() }} by
-        <a
-          href="http://github.com/feriva22"
-          target="_blank"
-          rel="noopener noreferrer"
-          >feriva22</a
-        >
-        & adhitama</span
-      >
+      <span>&copy; {{ new Date().getFullYear() }} </span>
     </v-footer>
   </v-app>
 </template>
@@ -89,6 +80,12 @@ export default {
       drawer: true,
       fixed: false,
       features: [
+        {
+          icon: 'mdi-cloud-upload',
+          title: 'Host Image',
+          to: '/feature/hosting',
+          ready: true,
+        },
         {
           icon: 'mdi-crop',
           title: 'Crop Image',
@@ -123,7 +120,7 @@ export default {
       miniVariant: false,
       right: true,
       rightDrawer: false,
-      title: 'DeepRest Image',
+      title: 'Image Tool',
     }
   },
 }

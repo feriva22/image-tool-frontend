@@ -1,5 +1,5 @@
 import webpack from 'webpack'
-require('dotenv').config();
+require('dotenv').config()
 
 export default {
   // Disable server-side rendering: https://go.nuxtjs.dev/ssr-mode
@@ -12,26 +12,21 @@ export default {
     meta: [
       { charset: 'utf-8' },
       { name: 'viewport', content: 'width=device-width, initial-scale=1' },
-      { hid: 'description', name: 'description', content: '' }
+      { hid: 'description', name: 'description', content: '' },
     ],
-    link: [
-      { rel: 'icon', type: 'image/x-icon', href: '/favicon.ico' }
-    ],
+    link: [{ rel: 'icon', type: 'image/x-icon', href: '/favicon.ico' }],
     script: [
       {
-        src: 'http://danml.com/js/download.js'
-      }
-    ]
+        src: 'http://danml.com/js/download.js',
+      },
+    ],
   },
 
   // Global CSS: https://go.nuxtjs.dev/config-css
-  css: [
-  ],
+  css: [],
 
   // Plugins to run before rendering page: https://go.nuxtjs.dev/config-plugins
-  plugins: [
-    {src: '~/plugins/caman.js', ssr: false}
-  ],
+  plugins: [{ src: '~/plugins/caman.js', ssr: false }],
 
   // Auto import components: https://go.nuxtjs.dev/config-components
   components: true,
@@ -51,21 +46,22 @@ export default {
     '@nuxtjs/pwa',
     // https://go.nuxtjs.dev/content
     '@nuxt/content',
+    'vue-social-sharing/nuxt',
   ],
   //moment module configuration
   moment: {
-    defaultLocale: 'en'
+    defaultLocale: 'en',
   },
   // Axios module configuration: https://go.nuxtjs.dev/config-axios
   axios: {
-    baseURL: process.env.SERVER_URL
+    baseURL: process.env.SERVER_URL,
   },
 
   // PWA module configuration: https://go.nuxtjs.dev/pwa
   pwa: {
     manifest: {
-      lang: 'en'
-    }
+      lang: 'en',
+    },
   },
 
   // Content module configuration: https://go.nuxtjs.dev/config-content
@@ -83,15 +79,14 @@ export default {
           accent: '#8c9eff',
           error: '#b71c1c',
         },
-      }
-    }
+      },
+    },
   },
 
   // Build Configuration: https://go.nuxtjs.dev/config-build
-  build: {
-  },
+  build: {},
   server: {
     host: '0.0.0.0', //need listen to all ip for deploy in docker
-    port: process.env.PORT || 3000
-  }
+    port: process.env.PORT || 3000,
+  },
 }
