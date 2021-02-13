@@ -17,7 +17,7 @@
         <v-card-text>
           <p></p>
           <v-row>
-            <v-col cols="8">
+            <v-col cols="12" md="8">
               <v-file-input
                 :rules="rules"
                 ref="photoField"
@@ -47,11 +47,11 @@
                 </v-col>
               </v-row>
             </v-col>
-            <v-col cols="4">
+            <v-col cols="12" md="4">
               <v-row>
                 <v-col cols="12">
                   <v-text-field
-                    :disabled="preImgSrc == null"
+                    :disabled="preImgSrc == null || processUpload"
                     v-model="titleImg"
                     :value="titleImg"
                     label="Title"
@@ -59,7 +59,7 @@
                 </v-col>
                 <v-col cols="12">
                   <v-text-field
-                    :disabled="preImgSrc == null"
+                    :disabled="preImgSrc == null || processUpload"
                     v-model="descImg"
                     :value="descImg"
                     label="Description"
@@ -68,7 +68,7 @@
                 <v-col cols="12">
                   <v-select
                     v-model="expiryImg"
-                    :disabled="preImgSrc == null"
+                    :disabled="preImgSrc == null || processUpload"
                     :items="expiryOption"
                     label="Expiry file"
                   ></v-select>
@@ -76,7 +76,7 @@
                 <v-col cols="12">
                   <v-select
                     v-model="permissionType"
-                    :disabled="preImgSrc == null"
+                    :disabled="preImgSrc == null || processUpload"
                     :items="supportedType"
                     label="Permission Type"
                   ></v-select>
@@ -84,7 +84,7 @@
                 <v-col>
                   <v-text-field
                     v-show="permissionType == 'SECURE'"
-                    :disabled="preImgSrc == null"
+                    :disabled="preImgSrc == null || processUpload"
                     v-model="passwordSecurePermission"
                     :value="passwordSecurePermission"
                     label="Password"

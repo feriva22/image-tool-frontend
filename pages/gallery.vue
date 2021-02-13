@@ -1,6 +1,6 @@
 <template>
   <v-row>
-    <v-col class="text-center" md="12">
+    <v-col class="text-center" md="12" cols="12">
       <h1>Gallery Public Image</h1>
     </v-col>
     <v-col>

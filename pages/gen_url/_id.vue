@@ -5,7 +5,7 @@
       <template v-else-if="notValid">Invalid URL</template>
       <template v-else-if="isAuthorized">
         <v-row justify="center" align="center">
-          <v-col cols="6">
+          <v-col cols="12" md="6">
             <v-img
               max-height="500"
               max-width="600"
@@ -15,7 +15,7 @@
           </v-col>
         </v-row>
         <v-row justify="center" align="center">
-          <v-col cols="6">
+          <v-col cols="12" md="6">
             <v-card>
               <v-card-title class="headline">{{ dataResp.title }}</v-card-title>
               <v-card-subtitle>{{ dataResp.description }}</v-card-subtitle>
@@ -87,7 +87,7 @@
       <template v-else>
         Input password to access image
         <v-row>
-          <v-col cols="2">
+          <v-col cols="6" md="2">
             <v-form ref="passwordForm" v-model="valid" lazy-validation>
               <v-text-field
                 v-model="passwordAccess.value"

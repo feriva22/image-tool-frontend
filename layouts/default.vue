@@ -16,7 +16,7 @@
             <v-list-item-title>Home</v-list-item-title>
           </v-list-item-content>
         </v-list-item>
-        <v-list-group prepend-icon="mdi-apps">
+        <v-list-group prepend-icon="mdi-apps" :value="expand_feature">
           <template v-slot:activator>
             <v-list-item-content>
               <v-list-item-title>Feature</v-list-item-title>
@@ -76,6 +76,7 @@
 export default {
   data() {
     return {
+      expand_feature: false,
       clipped: true,
       drawer: true,
       fixed: false,
@@ -122,6 +123,11 @@ export default {
       rightDrawer: false,
       title: 'Image Tool',
     }
+  },
+  watch: {
+    '$route.path'(value) {
+      this.expand_feature = value.includes('/feature/')
+    },
   },
 }
 </script>

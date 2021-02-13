@@ -19,7 +19,7 @@
         <v-card-text>
           <p></p>
           <v-row>
-            <v-col cols="8">
+            <v-col cols="12" md="8">
               <v-row>
                 <v-col cols="12">
                   <v-file-input
@@ -46,12 +46,15 @@
                 </v-col>
                 <v-col cols="6" v-show="result != null">
                   Result Image :
-                  <img id="resultImage" style="max-height: 200px; max-width: 300px;" v-bind:src="result" />
-                  
+                  <img
+                    id="resultImage"
+                    style="max-height: 200px; max-width: 300px"
+                    v-bind:src="result"
+                  />
                 </v-col>
               </v-row>
             </v-col>
-            <v-col cols="4">
+            <v-col cols="12" md="4">
               <v-row>
                 <v-col cols="12">
                   <v-checkbox
@@ -106,7 +109,6 @@
 </template>
 
 <script>
-
 export default {
   data() {
     return {
@@ -160,26 +162,25 @@ export default {
   },
   watch: {
     manualSetContras: {
-      handler: function(val, oldVal){
-        window.Caman('#resultImage',function(){
-          var that = this;
-          this.revert();
-          val.forEach((el) => that[el.type](el.val));
-          this.render();
+      handler: function (val, oldVal) {
+        window.Caman('#resultImage', function () {
+          var that = this
+          this.revert()
+          val.forEach((el) => that[el.type](el.val))
+          this.render()
         })
       },
-      deep: true
+      deep: true,
     },
-    usePresetContras: function(val){
-      if(this.result != null){
-      this.targetPresetContras = null
-      window.Caman('#resultImage',function(){
-                this.revert();
-                this.render();
-            })
+    usePresetContras: function (val) {
+      if (this.result != null) {
+        this.targetPresetContras = null
+        window.Caman('#resultImage', function () {
+          this.revert()
+          this.render()
+        })
       }
-      
-    }
+    },
   },
   methods: {
     clearImage(ev) {
@@ -201,33 +202,33 @@ export default {
             'data:image/'.length,
             this.preImgSrc.indexOf(';base64')
           )
-          //load caman 
-          window.Caman('#resultImage',function(){
-            this['brightness'](0);
-            this['contrast'](0);
-            this.render();
+          //load caman
+          window.Caman('#resultImage', function () {
+            this['brightness'](0)
+            this['contrast'](0)
+            this.render()
           })
         }
       }
     },
     pickPresetContras(ev) {
       console.log(ev)
-      window.Caman('#resultImage',function(){
-          this.revert();
-          this[ev]();
-          this.render();
-        })
+      window.Caman('#resultImage', function () {
+        this.revert()
+        this[ev]()
+        this.render()
+      })
     },
     resetManualContras() {
       this.manualSetContras.forEach((val) => (val.val = 0))
     },
     downloadConvert() {
-      window.Caman('#resultImage',function(){
-            this.render(function(){
-                var base64 = this.toBase64()
-                download(base64, 'image.png', 'image/png')
-            });
-          })
+      window.Caman('#resultImage', function () {
+        this.render(function () {
+          var base64 = this.toBase64()
+          download(base64, 'image.png', 'image/png')
+        })
+      })
     },
   },
 }

@@ -1,7 +1,7 @@
 <template>
   <v-row>
     <v-spacer></v-spacer>
-    <v-col cols="8" class="text-center">
+    <v-col cols="12" md="8" sm="12" lg="8" class="text-center">
       <v-img
         src="/logo.png"
         max-height="250"
@@ -17,7 +17,7 @@
       </p>
       <h1>Team</h1>
       <v-row>
-        <v-col cols="4">
+        <v-col cols="12" md="4" sm="12">
           <v-card class="mx-auto" max-width="400">
             <v-img
               class="white--text align-end"
@@ -43,7 +43,7 @@
             </v-card-actions>
           </v-card>
         </v-col>
-        <v-col cols="4">
+        <v-col cols="12" md="4" sm="12">
           <v-card class="mx-auto" max-width="400">
             <v-img
               class="white--text align-end"
@@ -66,7 +66,7 @@
             </v-card-actions>
           </v-card>
         </v-col>
-        <v-col cols="4">
+        <v-col cols="12" md="4" sm="12">
           <v-card class="mx-auto" max-width="400">
             <v-img
               class="black--text align-end"
