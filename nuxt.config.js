@@ -17,7 +17,7 @@ export default {
     link: [{ rel: 'icon', type: 'image/x-icon', href: '/favicon.ico' }],
     script: [
       {
-        src: 'http://danml.com/js/download.js',
+        src: 'https://unpkg.com/downloadjs@1.4.7/download.js',
       },
     ],
   },
